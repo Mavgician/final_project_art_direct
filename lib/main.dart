@@ -10,10 +10,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    return MaterialApp(
+      title: 'ArtDirect',
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          subtitle1: TextStyle(color: Colors.white)
+        )
+      ),
+      home: const Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child: Login(),
         ),
       ),
     );
