@@ -39,10 +39,9 @@ class _LoginState extends State<Login> {
 
   String email = '';
 
-  Widget buildEmail() => TextField(
+  Widget buildEmail() => TextFormField(
     decoration: const InputDecoration(
-      labelText: 'email',
-      labelStyle: TextStyle(color: Colors.white),
+      labelText: 'Phone, Email Address, or User handle',
       enabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(color: Colors.white)
       )
@@ -56,6 +55,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.only(top: 125),
                   child: Container(
                     height: 620,
-                    padding: const EdgeInsets.only(left: 50, right: 50),
+                    padding: const EdgeInsets.only(left: 60, right: 60),
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 30, 37, 55),
                       borderRadius: BorderRadius.only(
