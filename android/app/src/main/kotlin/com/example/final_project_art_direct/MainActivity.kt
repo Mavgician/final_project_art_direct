@@ -1,4 +1,4 @@
-package com.example.final_project_art_direct
+package com.kamikaze.ArtDirect
 
 import io.flutter.embedding.android.FlutterActivity
 

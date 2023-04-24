@@ -1,5 +1,8 @@
+import 'package:final_project_art_direct/user/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+// Widgets for different types of buttons used in the app
 
 class SocialLoginButton extends StatelessWidget {
   const SocialLoginButton({
@@ -7,11 +10,12 @@ class SocialLoginButton extends StatelessWidget {
     required this.iconDirectory,
     required this.textButton,
     required this.onTap,
-    this.color = Colors.white
+    this.color = Colors.white,
+    this.textColor = Colors.black
   });
 
   final String textButton, iconDirectory;
-  final Color color;
+  final Color color, textColor;
   final Function()? onTap;
 
   @override
@@ -26,13 +30,13 @@ class SocialLoginButton extends StatelessWidget {
             height: 50,
             width: 300,
             child: InkWell(
-              onTap: () {},
+              onTap: onTap,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(iconDirectory),
                   const SizedBox(width: 10,),
-                  Text(textButton, style: const TextStyle(fontWeight: FontWeight.bold),)
+                  Text(textButton, style: TextStyle(fontWeight: FontWeight.bold, color: textColor),)
                 ],
               )
             ),
@@ -47,13 +51,17 @@ class NavigationButton extends StatelessWidget {
   const NavigationButton({
     super.key,
     required this.textButton,
+    required this.onTap,
     this.isOutline = false,
-    this.color = Colors.white
+    this.color = Colors.white,
+    this.textColor = Colors.black
   });
 
   final String textButton;
   final bool isOutline;
-  final Color color;
+  final Color color, textColor;
+
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +79,11 @@ class NavigationButton extends StatelessWidget {
                 border: Border.all(color: color)
               ),
             child: InkWell(
-              onTap: () {},
+              onTap: onTap,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(textButton, style: TextStyle(fontWeight: FontWeight.bold, color: isOutline ? color : null),)
+                  Text(textButton, style: TextStyle(fontWeight: FontWeight.bold, color: isOutline ? color : textColor),)
                 ],
               ),
             ),

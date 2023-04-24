@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.final_project_art_direct">
+    package="com.kamikaze.ArtDirect">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="final_project_art_direct"
+        android:label="Art Direct"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

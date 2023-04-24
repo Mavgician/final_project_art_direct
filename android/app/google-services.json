@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "733147415742",
+    "project_id": "artidirect-305ac",
+    "storage_bucket": "artidirect-305ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733147415742:android:f0ff1e6427cb087e870aef",
+        "android_client_info": {
+          "package_name": "com.example.final_project_art_direct"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733147415742-e1u1va12l7qd05n9rja1e3hoec24na1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGHA-e12xOHYi58SEBZvdbL3eQVlY382A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733147415742-2vknto2qm2kscqm7d6v1u2u8qsco3tot.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "733147415742-mopq28hm7l5es1pbaf68rb585jo8f0tf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.finalProjectArtDirect"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733147415742:android:bf678338c4b9c5c9870aef",
+        "android_client_info": {
+          "package_name": "com.kamikaze.ArtDirect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733147415742-e1u1va12l7qd05n9rja1e3hoec24na1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGHA-e12xOHYi58SEBZvdbL3eQVlY382A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733147415742-2vknto2qm2kscqm7d6v1u2u8qsco3tot.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "733147415742-mopq28hm7l5es1pbaf68rb585jo8f0tf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.finalProjectArtDirect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
