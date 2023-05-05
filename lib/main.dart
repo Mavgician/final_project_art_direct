@@ -1,8 +1,10 @@
+import 'package:final_project_art_direct/home/comment_page.dart';
 import 'package:final_project_art_direct/home/home.dart';
+import 'package:final_project_art_direct/user/sign_up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'user/auth_service.dart';
+import 'miscellaneous/auth_service.dart';
 import 'user/login.dart';
 
 void main() async {
@@ -25,7 +27,7 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'ArtDirect',
-      home: /* AuthService().handleAuthState() */ const Home()
+      home: AuthService().handleAuthState() /* Home() */ /* Login() */
     );
   }
 }

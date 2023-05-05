@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:final_project_art_direct/firebase/backend_helpers.dart';
 import 'package:final_project_art_direct/home/home.dart';
 import 'package:final_project_art_direct/user/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:final_project_art_direct/user/sign_up.dart';
 
 // Authentication using firebase
 
@@ -22,7 +23,18 @@ class AuthService {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
-          return const Home();
+          return FutureBuilder(
+            future: checkAccount(auth.currentUser!.uid),
+            builder: (context, AsyncSnapshot snapshotInner) {
+              if (snapshotInner.hasData) {
+                if (!snapshotInner.data) {
+                  
+                  return const SignUp();
+                }
+                else { return const Home(); }
+              } else { return const CircularProgressIndicator(); }
+            }
+          );
         } else {
           return const Login();
         }
@@ -30,10 +42,14 @@ class AuthService {
     );
   }
 
+  // Checks if account is in the database. If it's available it returns true and vice versa.
+  checkAccount(account) async {
+    if (await docCheckExist('users/$account')) { return true; }
+    else { return false; }
+  }
+
   // Sign in method that calls firebase's google auth
   signInGoogle() async {
-
-    var currUser = dataBase.collection('users').doc(auth.currentUser!.uid);
 
     // Authentication request
     final GoogleSignInAccount? googleUser = await GoogleSignIn(scopes: <String>['email']).signIn();
@@ -46,18 +62,18 @@ class AuthService {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken
     );
-
-    /* currUser.get()
-      .then((document) => {
-        if (!document.exists) {
-          Navigator.push
-        }
-      }); */
-
+    
     // Return user credential to Firebase authentication to sign in properly with google
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
   // Sign out method
-  signOut() { FirebaseAuth.instance.signOut(); }
+  signOut() { 
+
+    // Disconnect current user instance to force account selection on sign in if google provider is used.
+    GoogleSignIn().disconnect();
+
+    // Sign out from application.
+    auth.signOut();
+  }
 }

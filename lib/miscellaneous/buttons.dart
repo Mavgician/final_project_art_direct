@@ -1,4 +1,4 @@
-import 'package:final_project_art_direct/user/auth_service.dart';
+import 'package:final_project_art_direct/miscellaneous/helper_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -8,13 +8,13 @@ class SocialLoginButton extends StatelessWidget {
   const SocialLoginButton({
     super.key,
     required this.iconDirectory,
-    required this.textButton,
+    required this.text,
     required this.onTap,
     this.color = Colors.white,
     this.textColor = Colors.black
   });
 
-  final String textButton, iconDirectory;
+  final String text, iconDirectory;
   final Color color, textColor;
   final Function()? onTap;
 
@@ -35,8 +35,8 @@ class SocialLoginButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SvgPicture.asset(iconDirectory),
-                  const SizedBox(width: 10,),
-                  Text(textButton, style: TextStyle(fontWeight: FontWeight.bold, color: textColor),)
+                  addHorizontalSpace(10),
+                  Text(text, style: TextStyle(fontWeight: FontWeight.bold, color: textColor),)
                 ],
               )
             ),
@@ -50,14 +50,14 @@ class SocialLoginButton extends StatelessWidget {
 class NavigationButton extends StatelessWidget {
   const NavigationButton({
     super.key,
-    required this.textButton,
+    required this.text,
     required this.onTap,
     this.isOutline = false,
     this.color = Colors.white,
     this.textColor = Colors.black
   });
 
-  final String textButton;
+  final String text;
   final bool isOutline;
   final Color color, textColor;
 
@@ -83,7 +83,7 @@ class NavigationButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(textButton, style: TextStyle(fontWeight: FontWeight.bold, color: isOutline ? color : textColor),)
+                  Text(text, style: TextStyle(fontWeight: FontWeight.bold, color: isOutline ? color : textColor),)
                 ],
               ),
             ),
@@ -94,22 +94,10 @@ class NavigationButton extends StatelessWidget {
   }
 }
 
-class IconButton extends StatefulWidget {
-  const IconButton({
-    super.key,
-    required this.icon
-  });
+class List extends StatelessWidget {
+  const List({super.key});
 
-  final Icon icon;
-
-  @override
-  State<IconButton> createState() => IconButtonState();
-}
-
-class IconButtonState extends State<IconButton> {
-
-  @override
-
+  @override   
   Widget build(BuildContext context) {
     return const Placeholder();
   }

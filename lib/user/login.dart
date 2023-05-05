@@ -1,7 +1,7 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:final_project_art_direct/user/auth_service.dart';
+import 'package:final_project_art_direct/miscellaneous/themes.dart';
+import 'package:final_project_art_direct/miscellaneous/auth_service.dart';
+import 'package:final_project_art_direct/user/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project_art_direct/miscellaneous/buttons.dart';
 
@@ -27,18 +27,7 @@ class _LoginState extends State<Login> {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: MaterialApp(
-        theme: ThemeData(
-          inputDecorationTheme: const InputDecorationTheme(
-            labelStyle: TextStyle(color: Color.fromARGB(100, 255, 255, 255)),
-            floatingLabelStyle: TextStyle(color: Colors.blue),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue),
-            ),
-          ),
-        ),
+        theme: loginTheme,
         home: Scaffold(
           body: Stack(
             alignment: Alignment.bottomCenter,
@@ -59,7 +48,7 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.only(top: 125),
                       child: Container(
                         height: 620,
-                        padding: const EdgeInsets.only(left: 60, right: 60),
+                        padding: const EdgeInsets.symmetric(horizontal: 60),
                         decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 30, 37, 55),
                           borderRadius: BorderRadius.only(
@@ -74,7 +63,7 @@ class _LoginState extends State<Login> {
                             addVerticalSpace(20,),
                             SocialLoginButton(
                               iconDirectory: 'assets/icons/socmed/google.svg',
-                              textButton: 'Login with Google',
+                              text: 'Login with Google',
                               onTap: () async {
                                 AuthService().signInGoogle();
                               },
@@ -94,9 +83,9 @@ class _LoginState extends State<Login> {
                                   ),
                                   addVerticalSpace(20,),
                                   NavigationButton(
-                                    textButton: 'Next',
+                                    text: 'Next',
                                     onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp()));
                                     },
                                   ),
                                 ],
@@ -104,25 +93,14 @@ class _LoginState extends State<Login> {
                             ),
                             addVerticalSpace(20,),
                             NavigationButton(
-                              textButton: 'Forgot Password?',
+                              text: 'Forgot Password?',
                               isOutline: true,
                               onTap: () {
                                 
                               },
                             ),
                             addVerticalSpace(20,),
-                            NavigationButton(
-                              textButton: 'Test Button',
-                              onTap: () {
-                                FirebaseFirestore.instance.collection('posts').get()
-                                  .then((querySnapshot) {
-                                    var data = querySnapshot.docs.map((doc) => doc.data()).toList();
-
-                                    print(data[0]['author']);
-                                  }
-                                );
-                              },
-                            ),
+                            
                           ],
                         ),
                       ),
