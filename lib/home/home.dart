@@ -24,10 +24,24 @@ class _HomeState extends State<Home> {
   List<int> postLikes = [32];
   List<int> postComments = [23];
 
+  int count = 0;
+
+  Future getCount() async {
+    Post().getPostLength().then(
+      (val) {
+        setState(() {
+          count = val;
+        });
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    var posts = getPostList();
+    Post posts = Post();
+
+
 
     return MaterialApp(
       title: 'ArtDirect',
@@ -99,7 +113,7 @@ class _HomeState extends State<Home> {
             color: Colors.black
           ),
           child: ListView.builder(
-            itemCount: posts.length,
+            itemCount: count,
             itemBuilder: (context, index) {
               return Container(
                 decoration: const BoxDecoration(
@@ -118,15 +132,15 @@ class _HomeState extends State<Home> {
                             width: 50,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(9999),
-                              child: Image.network(posts[index][''], fit: BoxFit.cover,),
+                              child: Image.network(getImageUrl(posts.getPostList()[index]['postMedia'][0]) as String, fit: BoxFit.cover,),
                             ),
                           ),
                           const SizedBox(width: 15,),
                           Expanded(child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(posts[index]['author'][0], style: Theme.of(context).textTheme.bodyMedium),
-                                Text(posts[index]['author'][1], style: Theme.of(context).textTheme.bodySmall)
+                                Text(posts.getPostList()[index]['author'][0], style: Theme.of(context).textTheme.bodyMedium),
+                                Text(posts.getPostList()[index]['author'][1], style: Theme.of(context).textTheme.bodySmall)
                               ],
                             )
                           ),
@@ -148,7 +162,7 @@ class _HomeState extends State<Home> {
                           children: [
                             Text(postDescription[index], style: Theme.of(context).textTheme.bodySmall,),
                             const SizedBox(height: 20,),
-                            Text('${postLikes[index]} Likes', style: Theme.of(context).textTheme.bodyLarge,),
+                            Text('${posts.getPostList()[index]['popularity']} Likes', style: Theme.of(context).textTheme.bodyLarge,),
                             const SizedBox(height: 20,),
                             Text('View Comments (${postComments[index]})', style: Theme.of(context).textTheme.bodyLarge,),
                             const SizedBox(height: 10,),
