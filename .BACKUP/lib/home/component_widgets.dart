@@ -1,9 +1,10 @@
-import 'package:final_project_art_direct/home/Settings.dart';
 import 'package:final_project_art_direct/miscellaneous/auth_service.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:final_project_art_direct/miscellaneous/buttons.dart';
 import 'package:final_project_art_direct/miscellaneous/helper_widgets.dart';
 
 import 'package:final_project_art_direct/firebase/backend_helpers.dart';
@@ -200,32 +201,27 @@ Widget sideDrawer(context) {
             });
           }
         ), */
-        /* ListTile(
+        ListTile(
           title: const Text('Profile'),
           leading: const Icon(Icons.person),
           iconColor: Colors.white,
           contentPadding: const EdgeInsets.symmetric(horizontal: 50),
           onTap: () {},
-        ), */
+        ),
         ListTile(
           title: const Text('Settings'),
           leading: const Icon(Icons.settings),
           iconColor: Colors.white,
           contentPadding: const EdgeInsets.symmetric(horizontal: 50),
-          onTap: () {
-            Navigator.push(
-              context, 
-              MaterialPageRoute(builder: (context) => const SettingsPage())
-            );
-          },
+          onTap: () {},
         ),
-        /* ListTile(
+        ListTile(
           title: const Text('Help'),
           leading: const Icon(Icons.info),
           iconColor: Colors.white,
           contentPadding: const EdgeInsets.symmetric(horizontal: 50),
           onTap: () {},
-        ), */
+        ),
         Expanded(
           child: Align(
             alignment: Alignment.bottomLeft,
@@ -237,6 +233,8 @@ Widget sideDrawer(context) {
               contentPadding: const EdgeInsets.symmetric(horizontal: 50),
               onTap: () async {
                 AuthService().signOut();
+                Navigator.of(context)
+                  .pushAndRemoveUntil(MaterialPageRoute(builder: (context) => AuthService().handleAuthState()), (Route route) => false);
               },
             ),
           )

@@ -1,6 +1,5 @@
 import 'package:final_project_art_direct/miscellaneous/themes.dart';
 import 'package:final_project_art_direct/miscellaneous/auth_service.dart';
-import 'package:final_project_art_direct/user/password_login.dart';
 import 'package:final_project_art_direct/user/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project_art_direct/miscellaneous/buttons.dart';
@@ -60,21 +59,11 @@ class _LoginState extends State<Login> {
                             addVerticalSpace(145,),
                             Text('Sign in to ArtDirect', style: TextStyle(fontSize: responsiveHeaderSize(context), fontWeight: FontWeight.w900, color: Colors.white),),
                             addVerticalSpace(20,),
-                            BiggerNavigationButton(
+                            SocialLoginButton(
                               iconDirectory: 'assets/icons/socmed/google.svg',
                               text: 'Login with Google',
-                              onTap: AuthService().signInGoogle,
-                            ),
-                            addVerticalSpace(20),
-                            BiggerNavigationButton(
-                              text: 'Sign Up',
-                              color: const Color.fromARGB(255, 42, 51, 136),
-                              textColor: Colors.white,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => const SignUp(loginData: '', loginType: 'email', navigatedFrom: true,))
-                                );
+                              onTap: () async {
+                                AuthService().signInGoogle();
                               },
                             ),
                             addVerticalSpace(30,),
@@ -85,18 +74,16 @@ class _LoginState extends State<Login> {
                               child: Column(
                                 children: [
                                   TextFormField(
-                                    decoration: const InputDecoration( labelText: 'Email Address, or User handle', ),
+                                    decoration: const InputDecoration( labelText: 'Phone, Email Address, or User handle', ),
                                     style: const TextStyle( color: Colors.white ),
                                     onChanged: (value) => setState(() => { loginData = value }),
-                                    validator: (value) => value!.isEmpty ? 'Please enter Email Address or User handle!' : null,
+                                    validator: (value) => value!.isEmpty ? 'Please enter Phone, Email Address, or User handle!' : null,
                                   ),
                                   addVerticalSpace(20,),
                                   NavigationButton(
                                     text: 'Next',
                                     onTap: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordLogin(loginData: loginData, loginType: 'test', navigatedFrom: true,)));
-                                      }
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUp()));
                                     },
                                   ),
                                 ],
@@ -110,6 +97,8 @@ class _LoginState extends State<Login> {
                                 
                               },
                             ),
+                            addVerticalSpace(20,),
+                            
                           ],
                         ),
                       ),
@@ -120,8 +109,7 @@ class _LoginState extends State<Login> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(1000),
                         color: Colors.white,
-                      ),
-                      child: Image.network('https://firebasestorage.googleapis.com/v0/b/artidirect-305ac.appspot.com/o/app%20resources%2Fapp-logo.jpg?alt=media&token=d8317d26-9ec4-4143-b2eb-a6a78de95b64'),
+                      )
                     ),
                   ],
                 ),

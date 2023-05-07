@@ -58,6 +58,7 @@ class _CommentPageState extends State<CommentPage> {
     }
 
     for (int i = currentListIndex; i < limit; i++) {
+
       Map<String, dynamic> convertedComRef = {};
       DocumentSnapshot rawComment = await commentRefList[i].get();
 
@@ -72,6 +73,7 @@ class _CommentPageState extends State<CommentPage> {
       convertedComRef['author picture'] = profilePictureURL;
 
       convertedList.add(convertedComRef);
+      currentListIndex = i;
     }
     
     return convertedList;

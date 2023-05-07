@@ -4,12 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 // Widgets for different types of buttons used in the app
 
-class BiggerNavigationButton extends StatelessWidget {
-  const BiggerNavigationButton({
+class SocialLoginButton extends StatelessWidget {
+  const SocialLoginButton({
     super.key,
+    required this.iconDirectory,
     required this.text,
     required this.onTap,
-    this.iconDirectory = '',
     this.color = Colors.white,
     this.textColor = Colors.black
   });
@@ -34,12 +34,8 @@ class BiggerNavigationButton extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-                  if (iconDirectory.isNotEmpty) ...[
-                    SvgPicture.asset(iconDirectory),
-                    addHorizontalSpace(10),
-                  ],
-
+                  SvgPicture.asset(iconDirectory),
+                  addHorizontalSpace(10),
                   Text(text, style: TextStyle(fontWeight: FontWeight.bold, color: textColor),)
                 ],
               )

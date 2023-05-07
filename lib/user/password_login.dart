@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:final_project_art_direct/miscellaneous/buttons.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({
+class PasswordLogin extends StatefulWidget {
+  const PasswordLogin({
     super.key,
     required this.loginData,
     required this.loginType,
@@ -17,16 +17,16 @@ class SignUp extends StatefulWidget {
   final bool navigatedFrom;
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<PasswordLogin> createState() => _PasswordLoginState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _PasswordLoginState extends State<PasswordLogin> {
 
   final _formKey = GlobalKey<FormState>();
-  String _login = '', _password = '', _passwordConfirmation = '', _userHandle = '', _displayName = '';
+  String _login = '', _password = '';
   int? _signInState;
 
-  bool _isPassConVisible = true, _isPassVisible = true;
+  bool _isPassVisible = true;
 
   @override
   void initState() {
@@ -48,13 +48,13 @@ class _SignUpState extends State<SignUp> {
                 child: Column(
                   children: [
                     const Text(
-                      'Get started',
+                      'Login',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 32),
                     ),
                     addVerticalSpace(10),
                     const Text(
-                      'Create your ArtDirect account to share your beautiful artworks.',
+                      'Login to your ArtDirect account to browse and appreciate art.',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white,)
                     ),
@@ -64,7 +64,7 @@ class _SignUpState extends State<SignUp> {
                       child: Column(
                         children: [
                           TextFormField(
-                            initialValue: widget.loginData,
+                            initialValue: _login,
                             decoration: InputDecoration( labelText: widget.loginType, ),
                             style: const TextStyle( color: Colors.white ),
                             /* enabled: false, */
@@ -74,48 +74,12 @@ class _SignUpState extends State<SignUp> {
                               });
                             },
                             validator: (value) {
-                              if (_signInState == 1) {
-                                return 'Email is already in use!';
+                              if (_signInState == 0 || _signInState == 2) {
+                                return 'Invalid email!';
                               } else {
                                 return null;
                               }
                             },
-                          ),
-                          addVerticalSpace(20),
-                          TextFormField(
-                            decoration: const InputDecoration( labelText: 'Display Name', ),
-                            style: const TextStyle( color: Colors.white ),
-                            onChanged: (value) {
-                              setState(() {
-                                _displayName = value;
-                              });
-                            },
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Enter a display name';
-                              } else { return null; }
-                            },
-                          ),
-                          addVerticalSpace(20),
-                          TextFormField(
-                            initialValue: '@',
-                            decoration: const InputDecoration( labelText: 'Handle', ),
-                            style: const TextStyle( color: Colors.white ),
-                            onChanged: (value) {
-                              setState(() {
-                                _userHandle = value;
-                              });
-                            },
-                            validator: (value) {
-                              if (_signInState == 2) {
-                                return 'Already taken!';
-                              } else if (isValueValid(r'@+[a-zA-Z0-9_\.]{4,20}$', _userHandle)) {
-                                return null;
-                              } else {
-                                _userHandle = '';
-                                return 'Invalid handle!';
-                              }
-                            }
                           ),
                           addVerticalSpace(20),
                           TextFormField(
@@ -143,48 +107,16 @@ class _SignUpState extends State<SignUp> {
                             },
                             validator: (value) {
                               if (value!.isEmpty) { return 'Password should not be empty!'; }
-                              else if (value == _passwordConfirmation) {
-                                if (_signInState == 0) {
-                                  return 'Password is weak!';
-                                } else {
-                                  return null; 
-                                }
-                              }
-                              else { return 'Passwords do not match!'; }
+                              else if (_signInState == 3) { return 'Invalid Password'; }
+                              else { return null; }
                             },
-                          ),
-                          addVerticalSpace(20),
-                          TextFormField(
-                            obscureText: _isPassConVisible,
-                            decoration: InputDecoration( 
-                              labelText: 'Confirm Password',
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  !_isPassConVisible ?
-                                    Icons.visibility :
-                                    Icons.visibility_off
-                                  ,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isPassConVisible = !_isPassConVisible;
-                                  });
-                                },
-                              )
-                            ),
-                            style: const TextStyle( color: Colors.white ),
-                            onChanged: (value) {
-                              setState(() { _passwordConfirmation = value; });
-                            },
-                            validator: (value) => value == _password ? null : 'Passwords do not match!',
                           ),
                           addVerticalSpace(40),
                           NavigationButton(
-                            text: 'Get Started!',
+                            text: 'Login',
                             onTap: () {
                               _formKey.currentState!.validate();
-                              AuthService().signUp(_login, _password, _passwordConfirmation, _userHandle, _displayName, context)
+                              AuthService().signInEmailPassword(_login, _password, context)
                               .then((value) {
                                 setState(() { _signInState = value; });
                                 _formKey.currentState!.validate();

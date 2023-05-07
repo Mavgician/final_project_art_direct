@@ -49,31 +49,3 @@ ThemeData loginTheme = ThemeData(
   ),
   scaffoldBackgroundColor: const Color.fromARGB(255, 30, 37, 55),
 );
-
-ThemeData settingsTheme = ThemeData(
-  appBarTheme: const AppBarTheme(
-    color: Colors.black
-  ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    unselectedItemColor: Colors.white
-  ),
-  iconTheme: const IconThemeData(
-    color: Colors.white
-  ),
-  scaffoldBackgroundColor: const Color.fromARGB(255, 30, 37, 55),
-  textTheme: TextTheme(
-    bodyLarge: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 24),
-    bodyMedium: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900),
-    bodySmall: TextStyle(color: Colors.white.withOpacity(0.5)),
-  ),
-  inputDecorationTheme: const InputDecorationTheme(
-    labelStyle: TextStyle(color: Color.fromARGB(100, 255, 255, 255)),
-    floatingLabelStyle: TextStyle(color: Colors.blue),
-    enabledBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.white),
-    ),
-    focusedBorder: UnderlineInputBorder(
-      borderSide: BorderSide(color: Colors.blue),
-    ),
-  ),
-);

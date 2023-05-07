@@ -207,3 +207,7 @@ Map<String, dynamic> addComment(comment, uid, postReference) {
 
   return commentData;
 }
+
+void createAccount(uid) {
+  
+}
